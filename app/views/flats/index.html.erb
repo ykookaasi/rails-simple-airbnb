@@ -1,2 +1,49 @@
-<h1>Flats#index</h1>
-<p>Find me in app/views/flats/index.html.erb</p>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-12">
+      <h1>All Flats</h1>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-12">
+      <% if @query %>
+        <p>You searched for <%= @query %>. We found <%= @flats.count %> flats in <%= Flat.count %> </p>
+      <% else %>
+        <p>All <%= Flat.count %> flats </p>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <% @flats.each do |flat| %>
+    <div class="col-4">
+      <div>
+        <div>
+          <h3><%= flat.name %> </h3>
+          <p>p<%= flat.address %> </p>
+          <div>
+            <i class="material-icons mr-2">people</i><span><%= flat.number_of_guests %></span>
+          </div>
+          <div>
+            <i class="material-icons mr-2">euro_symbol</i> <%= flat.price_per_night %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <%= link_to 'More info', flat_path(flat) %>
+      <%= link_to 'Edit', edit_flat_path(flat), class: 'ml-3 text-warning' %>
+      <%= link_to "Remove", flat_path(flat), method: :delete, data: { confirm: "Are you sure?" }, class: 'ml-3 text-danger' %>
+    </div>
+
+    <% end %>
+
+  </div>
+
+
+
+
+</div>
